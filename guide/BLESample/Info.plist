@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Wymagane identyfikatory aplikacji -->
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundleDisplayName</key>
+	<string>BLESample</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+
+	<!-- Wymagane uprawnienie do Bluetooth (od iOS 13+).
+	     Bez tego klucza iOS zablokuje dostęp do BLE i aplikacja dostanie .unauthorized. -->
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>BLESample uses Bluetooth to demonstrate Central and Peripheral BLE roles, including scanning, connecting, reading, writing, and receiving notifications.</string>
+
+	<!-- UIBackgroundModes MUSI być tablicą (array), nie stringiem.
+	     INFOPLIST_KEY_UIBackgroundModes w build settings generuje string — to jest błąd Xcode.
+	     Dlatego ten klucz jest tutaj w ręcznym Info.plist.
+
+	     bluetooth-central:  pozwala CBCentralManager działać w tle (skanowanie, połączenia)
+	     bluetooth-peripheral: pozwala CBPeripheralManager działać w tle (advertising, odpowiedzi) -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+		<string>bluetooth-peripheral</string>
+	</array>
+
+	<!-- Scene Manifest — wymagane dla SwiftUI/UIKit multi-window (iOS 13+) -->
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict/>
+	</dict>
+
+	<!-- Launch Screen — pusty (SwiftUI obsługuje własny splash) -->
+	<key>UILaunchScreen</key>
+	<dict/>
+
+	<!-- Orientacje iPhone -->
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+
+	<!-- Orientacje iPad -->
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+
+	<!-- Obsługa pośrednich urządzeń wejściowych (gamepad, mysz przez USB-C itp.) -->
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+</dict>
+</plist>
